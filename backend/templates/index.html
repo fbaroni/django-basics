@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>Posts</title>
+    </head>
+    <body>
+        <form action="{% url 'backend_index' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save" />
+        </form>
+    </body>
+</html>
