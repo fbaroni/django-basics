@@ -23,8 +23,8 @@ def index(request):
 
 def get_json(request):
     post = Post.objects.all()
-    return HttpResponse(serialize('json', post, cls=PostSerializer))
+    return HttpResponse(serialize('json', post, cls=PostSerializer), content_type="application/json")
 
 def detail(request, post_id):
     post = Post.objects.get(pk=post_id)
-    return HttpResponse(serialize('json', [post], cls=PostSerializer))
+    return HttpResponse(serialize('json', [post], cls=PostSerializer), content_type="application/json")
