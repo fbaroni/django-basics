@@ -1,8 +1,10 @@
-import json
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from .forms import PostForm
+from django.core.serializers import serialize
 from backend.models import Post
+from backend.serializers import PostSerializer
 
 # Create your views here.
 def index(request):
@@ -18,3 +20,11 @@ def index(request):
         'form': form,
     }
     return render(request, 'index.html', context)
+
+def get_json(request):
+    post = Post.objects.all()
+    return HttpResponse(serialize('json', post, cls=PostSerializer))
+
+def detail(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    return HttpResponse(serialize('json', [post], cls=PostSerializer))
